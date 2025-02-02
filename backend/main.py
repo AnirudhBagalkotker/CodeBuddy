@@ -1,9 +1,12 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-import os
 from dotenv import load_dotenv
 import together
+import os
+import httpx
+import asyncio
+import traceback
 
 load_dotenv()  # Load API Key from .env
 
@@ -32,6 +35,7 @@ client = together.Together(api_key=TOGETHER_API_KEY)
 class CodeInput(BaseModel):
     language: str
     code: str
+    inputs: str
 
 
 # Root Route (For Testing)
@@ -63,7 +67,30 @@ async def generate_comments(data: CodeInput):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@app.post("/run_code/")
+async def run_code(data: CodeInput):
+    try:
+        requestUrl = "https://api.codex.jaagrav.in/"
+        json_data = {
+            "code": data.code,
+            "language": data.language,
+            "input": data.inputs,
+        }
+
+        async with httpx.AsyncClient() as client:
+            response = await client.post(requestUrl, json=json_data)
+            return response.json()
+
+    except Exception as e:
+        error_details = traceback.format_exc()
+        print(error_details)
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 # Frontend Route Simulation
 @app.get("/frontend_status/")
 async def frontend_status():
     return {"message": "Frontend is connected successfully ✅"}
+
+
+# uvicorn main:app --reload
