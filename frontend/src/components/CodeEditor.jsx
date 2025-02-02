@@ -1,33 +1,16 @@
 import { useState, useEffect } from 'react';
 import Editor from '@monaco-editor/react';
-import {
-	Files,
-	MessageSquare,
-	File,
-	Folder,
-	FolderOpen,
-	ChevronRight,
-	ChevronDown,
-	X,
-	Plus,
-	Play
-} from 'lucide-react';
+import { Files, MessageSquare, File, Folder, FolderOpen, ChevronRight, ChevronDown, X, Plus, Play } from 'lucide-react';
 
 const CodeEditor = () => {
-	const [files, setFiles] = useState({
-		'root': {
-			type: 'folder',
-			children: {},
-			isOpen: true
-		}
-	});
+	const [files, setFiles] = useState({ 'root': { type: 'folder', children: {}, isOpen: true } });
 	const [openFiles, setOpenFiles] = useState([]);
 	const [activeFile, setActiveFile] = useState(null);
-	const [code, setCode] = useState('');
-	const [language, setLanguage] = useState('plaintext');
-	const [inputs, setInputs] = useState(['']); // Start with one empty input field
-	const [isLoading, setIsLoading] = useState(false);
 	const [activeMenu, setActiveMenu] = useState('files');
+	const [language, setLanguage] = useState('plaintext');
+	const [code, setCode] = useState('');
+	const [inputs, setInputs] = useState(['']);
+	const [isLoading, setIsLoading] = useState(false);
 	const [, setError] = useState('');
 
 	useEffect(() => {
@@ -393,7 +376,7 @@ const CodeEditor = () => {
 						{activeMenu === 'files' && (
 							<div className="flex flex-col h-full">
 								<div className="p-4 text-[#eeeeee] font-medium flex items-center justify-between">
-									<span>EXPLORER</span>
+									<span>FILE EXPLORER</span>
 									<button
 										onClick={createFileOrFolder}
 										className="hover:bg-[#37373d] p-1 rounded"
