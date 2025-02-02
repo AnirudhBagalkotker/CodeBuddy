@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import { Files, MessageSquare, Play } from 'lucide-react';
+import PropTypes from 'prop-types';
 
 const IconSidebar = ({ activeMenu, setActiveMenu }) => {
 	return (
@@ -37,5 +37,17 @@ const SidebarButton = ({ icon, isActive, onClick, title }) => {
 		</button>
 	);
 };
+
+IconSidebar.propTypes = {
+	activeMenu: PropTypes.string,
+	setActiveMenu: PropTypes.func.isRequired,
+}
+
+SidebarButton.propTypes = {
+	icon: PropTypes.element.isRequired,
+	isActive: PropTypes.bool.isRequired,
+	onClick: PropTypes.func.isRequired,
+	title: PropTypes.string.isRequired,
+}
 
 export default IconSidebar;

@@ -1,8 +1,8 @@
-/* eslint-disable react/prop-types */
 import { useDispatch, useSelector } from 'react-redux';
 import { ChevronDown, ChevronRight, FolderOpen, Folder, File, X, FilePlus, FolderPlus, Download } from 'lucide-react';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
+import PropTypes from 'prop-types';
 import { toggleFolderOpen, deleteFileOrFolder, createFileOrFolder, } from '../../store/slices/fileSlice';
 import { handleFileSelect, saveNewFiles } from '../../store/thunks/fileThunks';
 
@@ -163,6 +163,23 @@ const FileExplorer = () => {
 			</div>
 		</div>
 	);
+};
+
+FolderItem.propTypes = {
+	name: PropTypes.string.isRequired,
+	item: PropTypes.object.isRequired,
+	indent: PropTypes.number.isRequired,
+	onToggle: PropTypes.func.isRequired,
+	onDelete: PropTypes.func.isRequired,
+	renderChildren: PropTypes.func.isRequired,
+};
+
+FileItem.propTypes = {
+	name: PropTypes.string.isRequired,
+	indent: PropTypes.number.isRequired,
+	isActive: PropTypes.bool.isRequired,
+	onSelect: PropTypes.func.isRequired,
+	onDelete: PropTypes.func.isRequired,
 };
 
 export default FileExplorer;

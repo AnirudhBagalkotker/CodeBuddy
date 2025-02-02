@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import { useDispatch, useSelector } from 'react-redux';
 import { X } from 'lucide-react';
+import PropTypes from 'prop-types';
 import { setActiveFile, setOpenFiles, setCode, setLanguage } from '../../store/slices/fileSlice';
 import { getFileIcon } from '../../utils/fileHelpers.js';
 
@@ -79,6 +79,14 @@ const Tab = ({ filePath, isActive, onClick, onClose, icon }) => {
 			</button>
 		</div >
 	);
+};
+
+Tab.propTypes = {
+	filePath: PropTypes.string.isRequired,
+	isActive: PropTypes.bool.isRequired,
+	onClick: PropTypes.func.isRequired,
+	onClose: PropTypes.func.isRequired,
+	icon: PropTypes.node.isRequired,
 };
 
 export default EditorTabs;
