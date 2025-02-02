@@ -20,7 +20,7 @@ const App = () => {
 				<div className="flex flex-col h-screen bg-[#1e1e1e]">
 					{/* Header */}
 					<div className="h-12 bg-[#1f1f1f] border-b border-[#2d2d2d] flex items-center px-4">
-						<h1 className="text-[#eeeeee] text-xl font-bold">CodeBuddy.ai</h1>
+						<h1 className="text-[#eeeeee] text-xl font-bold select-none">CodeBuddy.ai</h1>
 					</div>
 					<div className="flex flex-1 overflow-hidden">
 						<IconSidebar activeMenu={activeMenu} setActiveMenu={setActiveMenu} />

@@ -24,7 +24,7 @@ const RunPanel = () => {
 
 	return (
 		<div className="p-4">
-			<h3 className="text-[#eeeeee] font-medium mb-4">RUN CODE</h3>
+			<h3 className="text-[#eeeeee] font-medium mb-4 select-none">RUN CODE</h3>
 
 			<div className="mb-8">
 				{inputs.map((input, index) => (

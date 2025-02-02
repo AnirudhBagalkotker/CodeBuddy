@@ -8,26 +8,30 @@ const IconSidebar = ({ activeMenu, setActiveMenu }) => {
 				icon={<Files size={24} className="text-[#eeeeee]" />}
 				isActive={activeMenu === 'files'}
 				onClick={() => setActiveMenu(activeMenu === 'files' ? null : 'files')}
+				title='File Explorer'
 			/>
 			<SidebarButton
 				icon={<Play size={24} className="text-[#eeeeee]" />}
 				isActive={activeMenu === 'run'}
 				onClick={() => setActiveMenu(activeMenu === 'run' ? null : 'run')}
+				title='Run Code'
 			/>
 			<SidebarButton
 				icon={<MessageSquare size={24} className="text-[#eeeeee]" />}
 				isActive={activeMenu === 'comments'}
 				onClick={() => setActiveMenu(activeMenu === 'comments' ? null : 'comments')}
+				title='Generate Comments'
 			/>
 		</div>
 	);
 };
 
-const SidebarButton = ({ icon, isActive, onClick }) => {
+const SidebarButton = ({ icon, isActive, onClick, title }) => {
 	return (
 		<button
 			className={`p-2 mb-2 hover:bg-[#37373d] ${isActive ? 'bg-[#37373d] opacity-100' : 'opacity-40'}`}
 			onClick={onClick}
+			title={title}
 		>
 			{icon}
 		</button>

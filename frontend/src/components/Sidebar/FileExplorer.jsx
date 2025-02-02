@@ -17,7 +17,7 @@ const FolderItem = ({ name, item, indent, onToggle, onDelete, renderChildren }) 
 				: (<ChevronRight size={16} className="text-[#eeeeee] mr-1" />)}
 			{item.isOpen ? (<FolderOpen size={16} className="text-[#eeeeee] mr-2" />)
 				: (<Folder size={16} className="text-[#eeeeee] mr-2" />)}
-			<span className="text-[#eeeeee] text-sm flex-1">{name}</span>
+			<span className="text-[#eeeeee] text-sm flex-1 select-none">{name}</span>
 			<X
 				size={16}
 				className="text-[#eeeeee] opacity-0 group-hover:opacity-100 hover:text-white"
@@ -38,7 +38,7 @@ const FileItem = ({ name, indent, isActive, onSelect, onDelete }) => (
 		style={{ paddingLeft: `${indent + 20}px` }}
 	>
 		<File size={16} className="text-[#eeeeee] mr-2" />
-		<span className="text-[#eeeeee] text-sm flex-1">{name}</span>
+		<span className="text-[#eeeeee] text-sm flex-1 select-none">{name}</span>
 		<X
 			size={16}
 			className="text-[#eeeeee] opacity-0 group-hover:opacity-100 hover:text-white"
@@ -133,7 +133,7 @@ const FileExplorer = () => {
 	return (
 		<div className="flex flex-col h-full">
 			<div className="p-4 text-[#eeeeee] font-medium flex items-center justify-between">
-				<span>FILE EXPLORER</span>
+				<span className='select-none'>FILE EXPLORER</span>
 				<div className='flex items-center justify-center space-x-1'>
 					<div
 						onClick={handleCreateFile}

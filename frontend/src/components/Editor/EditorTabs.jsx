@@ -60,20 +60,24 @@ const Tab = ({ filePath, isActive, onClick, onClose, icon }) => {
 		<div
 			onClick={onClick}
 			className={`flex items-center h-full px-3 min-w-[100px] max-w-[200px] cursor-pointer select-none group
-        ${isActive
+				${isActive
 					? 'bg-[#1e1e1e] text-white border-t-2 border-t-[#0e639c]'
 					: 'text-[#969696] border-t-2 border-t-[#2d2d2d] hover:bg-[#292c2c] hover:border-t-[#292c2c] '
 				}`}
+			title={filePath.split('root/').pop()}
 		>
 			<span className="mr-2">{icon}</span>
 			<span className="truncate flex-1 text-sm">{fileName}</span>
 			<button
 				onClick={onClose}
-				className={`ml-2 p-1 rounded-md opacity-0 ${isActive ? 'bg-[#1e1e1e] text-white opacity-100' : 'text-[#969696] group-hover:opacity-100 bg-[#292c2c] hover:bg-[#232525]'}`}
+				className={`ml-2 p-1 rounded-md opacity-0
+					${isActive ? 'bg-[#1e1e1e] text-white opacity-100' : 'text-[#969696] group-hover:opacity-100 bg-[#292c2c] hover:bg-[#232525]'}`
+				}
+				title="Close Tab"
 			>
 				<X size={14} />
 			</button>
-		</div>
+		</div >
 	);
 };
 
