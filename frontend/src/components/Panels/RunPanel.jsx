@@ -1,10 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { setInputs } from '../../store/slices/runPanelSlice';
 import { runCode } from '../../store/thunks/runPanelThunks';
+import { getRunStatus } from '../../utils/fileHelpers';
 
 const RunPanel = () => {
 	const dispatch = useDispatch();
 	const { inputs, isLoading, error, output } = useSelector(state => state.runPanel);
+	const { activeFile } = useSelector(state => state.files);
 
 	const handleInputChange = (index, value) => {
 		const updatedInputs = [...inputs];
@@ -21,6 +23,9 @@ const RunPanel = () => {
 		const updatedInputs = inputs.filter((_, i) => i !== index);
 		dispatch(setInputs(updatedInputs));
 	};
+
+	const isAcceptable = getRunStatus(activeFile.split('.').pop());
+	const isNotAllowed = !(isAcceptable && !isLoading);
 
 	return (
 		<div className="p-4">
@@ -39,24 +44,22 @@ const RunPanel = () => {
 						{inputs.length > 1 && (
 							<button
 								onClick={() => removeInputField(index)}
-								className="text-red-500 px-4 py-2 rounded-sm text-sm flex items-center justify-center gap-2"
-							>
-								Remove
-							</button>
+								disabled={isNotAllowed}
+								className="text-red-500 px-4 py-2 rounded-sm text-sm flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+							> Remove </button>
 						)}
 					</div>
 				))}
 				<button
 					onClick={addInputField}
-					className="w-full px-4 py-2 bg-[#0e639c] hover:bg-[#1177bb] text-white rounded-sm text-sm flex items-center justify-center gap-2 mt-2"
-				>
-					+ Add more Inputs
-				</button>
+					disabled={isNotAllowed}
+					className="w-full px-4 py-2 bg-[#0e639c] hover:bg-[#1177bb] text-white rounded-sm text-sm flex items-center justify-center gap-2 mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
+				> + Add more Inputs </button>
 			</div>
 
 			<button
 				onClick={() => dispatch(runCode())}
-				disabled={isLoading}
+				disabled={isNotAllowed}
 				className="w-full px-4 py-2 bg-[#0e639c] hover:bg-[#1177bb] text-white rounded-sm text-sm flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
 			>
 				{isLoading ? 'Compiling...' : 'Run/Compile Code'}
@@ -71,6 +74,12 @@ const RunPanel = () => {
 			{output && (
 				<div className="mt-4 p-2 bg-[#1e1e1e] border border-[#2d2d2d] rounded">
 					<pre className="text-[#eeeeee] text-sm whitespace-pre-wrap">{output}</pre>
+				</div>
+			)}
+
+			{!isAcceptable && (
+				<div className="mt-4 p-2 bg-yellow-500/10 border border-yellow-500/20 rounded">
+					<p className="text-yellow-500 text-xs">This file type is not supported</p>
 				</div>
 			)}
 
