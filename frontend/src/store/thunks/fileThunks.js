@@ -1,14 +1,18 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { setFiles, setOpenFiles, setActiveFile, setCode, setLanguage } from '../slices/fileSlice';
+import { setFiles, setOpenFiles, setActiveFile, setCode, setLanguage, setProjectName } from '../slices/fileSlice';
 import { findFirstFile } from '../../utils/fileHelpers';
 
 export const initializeFiles = createAsyncThunk('files/initialize',
 	async (_, { dispatch }) => {
 		const storedFiles = JSON.parse(localStorage.getItem('codeFiles')) || {
-			'root': { type: 'folder', children: {}, isOpen: true }
+			'root': { type: 'folder', children: { 'Welcome.txt': { type: 'file', content: 'Hi, This is a Sample file', language: 'plaintext' } }, isOpen: true }
 		};
-
+		localStorage.setItem('codeFiles', JSON.stringify(storedFiles));
 		dispatch(setFiles(storedFiles));
+
+		const projectName = localStorage.getItem('projectName') || 'Untitled Project';
+		localStorage.setItem('projectName', projectName);
+		dispatch(setProjectName(projectName));
 
 		const { fullPath, key } = findFirstFile(storedFiles.root.children);
 
@@ -45,5 +49,12 @@ export const handleFileSelect = createAsyncThunk('files/selectFile',
 		dispatch(setActiveFile(fullPath));
 		dispatch(setCode(file.content));
 		dispatch(setLanguage(file.language));
+	}
+);
+
+export const handleProjectNameChange = createAsyncThunk('files/changeProjectName',
+	async (name, { dispatch }) => {
+		localStorage.setItem('projectName', name);
+		dispatch(setProjectName(name));
 	}
 );

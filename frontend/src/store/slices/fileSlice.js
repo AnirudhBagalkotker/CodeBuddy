@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { getLanguage, findFirstFile } from '../../utils/fileHelpers';
 
 const initialState = {
-	files: { 'root': { type: 'folder', children: {}, isOpen: true } },
+	projectName: 'Untitled Project',
+	files: { 'root': { type: 'folder', children: { 'Welcome.txt': { type: 'file', content: 'Hi, This is a Sample file', language: 'plaintext' } }, isOpen: true } },
 	openFiles: [],
 	activeFile: null,
 	code: '',
@@ -27,6 +28,9 @@ const fileSlice = createSlice({
 		},
 		setLanguage: (state, action) => {
 			state.language = action.payload;
+		},
+		setProjectName: (state, action) => {
+			state.projectName = action.payload;
 		},
 		toggleFolderOpen: (state, action) => {
 			const { path } = action.payload;
@@ -103,9 +107,7 @@ const fileSlice = createSlice({
 				};
 
 				const fullPath = `root/${parts.join('/')}`;
-				if (!state.openFiles.includes(fullPath)) {
-					state.openFiles.push(fullPath);
-				}
+				if (!state.openFiles.includes(fullPath)) state.openFiles.push(fullPath);
 				state.activeFile = fullPath;
 				state.code = '';
 				state.language = getLanguage(lastPart);
@@ -118,7 +120,24 @@ const fileSlice = createSlice({
 			}
 
 			state.files = newFiles;
-		}
+		},
+		renameFileOrFolder: (state, action) => {
+			const { oldPath, newName } = action.payload;
+			const parts = oldPath.split('/');
+			const name = parts.pop();
+
+			let current = state.files.root;
+			for (let i = 1; i < parts.length; i++) {
+				if (!current.children[parts[i]]) return;
+				current = current.children[parts[i]];
+			}
+
+			if (!current.children[name]) return;
+			if (current.children[newName] && newName !== name) return;
+
+			current.children = { ...current.children, [newName]: { ...current.children[name] }, };
+			delete current.children[name];
+		},
 	}
 });
 
@@ -128,9 +147,11 @@ export const {
 	setActiveFile,
 	setCode,
 	setLanguage,
+	setProjectName,
 	toggleFolderOpen,
 	deleteFileOrFolder,
-	createFileOrFolder
+	createFileOrFolder,
+	renameFileOrFolder
 } = fileSlice.actions;
 
 export default fileSlice.reducer;
