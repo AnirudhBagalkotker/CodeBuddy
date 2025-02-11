@@ -37,7 +37,7 @@ const EditorTabs = () => {
 	};
 
 	return (
-		<div className="bg-[#2d2d2d] flex items-center h-9 overflow-x-auto">
+		<div className="bg-[#2d2d2d] flex items-center h-9 overflow-x-auto w-[calc(100vw-54px)]">
 			{openFiles.map((filePath) => (
 				<Tab
 					key={filePath}
@@ -59,11 +59,8 @@ const Tab = ({ filePath, isActive, onClick, onClose, icon }) => {
 	return (
 		<div
 			onClick={onClick}
-			className={`flex items-center h-full px-3 min-w-[100px] max-w-[200px] cursor-pointer select-none group
-				${isActive
-					? 'bg-[#1e1e1e] text-white border-t-2 border-t-[#0e639c]'
-					: 'text-[#969696] border-t-2 border-t-[#2d2d2d] hover:bg-[#292c2c] hover:border-t-[#292c2c] '
-				}`}
+			className={`flex items-center h-full px-3 min-w-[100px] max-w-[300px] flex-shrink-0 cursor-pointer select-none group
+				${isActive ? 'bg-[#1e1e1e] text-white border-t-2 border-t-[#0e639c]' : 'text-[#969696] border-t-2 border-t-[#2d2d2d] hover:bg-[#292c2c] hover:border-t-[#292c2c]'}`}
 			title={filePath.split('root/').pop()}
 		>
 			<span className="mr-2">{icon}</span>

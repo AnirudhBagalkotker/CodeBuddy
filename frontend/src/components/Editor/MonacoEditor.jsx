@@ -11,18 +11,16 @@ const MonacoEditor = () => {
 	const { code, language, activeFile, files } = useSelector(state => state.files);
 	const { monacoOptions } = useSelector(state => state.editor);
 
-	// Handle editor mount
 	const handleEditorDidMount = (editor) => {
 		editorRef.current = editor;
 	};
 
-	// Handle code changes
 	const handleCodeChange = (value) => {
 		dispatch(setCode(value));
 
 		if (activeFile) {
 			const parts = activeFile.split('/');
-			const newFiles = JSON.parse(JSON.stringify(files)); // Deep copy to avoid mutation
+			const newFiles = JSON.parse(JSON.stringify(files));
 			let current = newFiles.root;
 
 			for (let i = 1; i < parts.length - 1; i++) {
@@ -31,8 +29,8 @@ const MonacoEditor = () => {
 
 			const fileName = parts[parts.length - 1];
 			current.children[fileName] = {
-				...current.children[fileName], // Ensure new reference
-				content: value // Update content
+				...current.children[fileName],
+				content: value
 			};
 
 			console.log(newFiles);
@@ -40,7 +38,6 @@ const MonacoEditor = () => {
 		}
 	};
 
-	// Handle editor keybindings
 	useEffect(() => {
 		if (monaco && editorRef.current) {
 			editorRef.current.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, () => {
@@ -66,7 +63,6 @@ const MonacoEditor = () => {
 	);
 };
 
-// Loading placeholder component
 const EditorLoadingPlaceholder = () => (
 	<div className="h-full w-full flex items-center justify-center bg-[#1e1e1e]">
 		<div className="text-[#eeeeee] text-lg">Loading CodeBuddy Editor...</div>
