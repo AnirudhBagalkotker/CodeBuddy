@@ -4,7 +4,7 @@
 
 ## **2. Share and Collaborate: Share your Projects & Code Files and Collaborate with others**
 
-## **3. Compiler APIs: Compile and Run Code in Real-Time using Codex Compiler APIs**
+## **✅ 3. Compiler APIs: Compile and Run Code in Real-Time using Codex Compiler APIs**
 
 ## **4. Generate Code: Generate Code for all the supported Languages using CodeBuddy.ai**
 
@@ -16,7 +16,7 @@
 
 ## **8. Generate Documentation: Generate Documentation for your Code in Real-Time using CodeBuddy.ai**
 
-## **9. Manage Projects: Create, Edit, Save and Collaborate on your Projects and Files**
+## **✅ 9. Manage Projects: Create, Edit and Save on your Projects and Files**
 
 ## **10. GitHub Integration: Save and Collaborate on your GitHub Repositories directly from your Browser**
 
