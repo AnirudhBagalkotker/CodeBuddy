@@ -67,6 +67,69 @@ async def generate_comments(data: CodeInput):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+# Code Generation API
+@app.post("/generate_code/")
+async def generate_code(data: CodeInput):
+    prompt = f"Generate the following {data.language} code:\n\n{data.code}"
+
+    try:
+        response = client.chat.completions.create(
+            model="meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt,
+                }
+            ],
+        )
+        return response.choices[0].message.content
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# Code Debugging API
+@app.post("/debug_code/")
+async def debug_code(data: CodeInput):
+    prompt = f"Debug the following {data.language} code:\n\n{data.code}"
+
+    try:
+        response = client.chat.completions.create(
+            model="meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt,
+                }
+            ],
+        )
+        return response.choices[0].message.content
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# Code Explainer API
+@app.post("/explain_code/")
+async def explain_code(data: CodeInput):
+    prompt = f"Explain the following {data.language} code:\n\n{data.code}"
+
+    try:
+        response = client.chat.completions.create(
+            model="meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt,
+                }
+            ],
+        )
+        return response.choices[0].message.content
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @app.post("/run_code/")
 async def run_code(data: CodeInput):
     try:
