@@ -8,6 +8,7 @@ import MonacoEditor from './components/Editor/MonacoEditor';
 import EditorTabs from './components/Editor/EditorTabs';
 import RunPanel from './components/Panels/RunPanel';
 import CommentsPanel from './components/Panels/CommentsPanel';
+import GenerateCodePanel from './components/Panels/GenerateCodePanel';
 import Header from './components/Header';
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
 							<div className="w-64 min-w-[256px] bg-[#252526] border-r border-[#2d2d2d]">
 								{activeMenu === 'files' && <FileExplorer />}
 								{activeMenu === 'run' && <RunPanel />}
+								{activeMenu === 'code' && <GenerateCodePanel />}
 								{activeMenu === 'comments' && <CommentsPanel />}
 							</div>
 						)}

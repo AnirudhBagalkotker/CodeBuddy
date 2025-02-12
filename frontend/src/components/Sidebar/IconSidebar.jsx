@@ -1,4 +1,4 @@
-import { Files, MessageSquare, Play } from 'lucide-react';
+import { Files, Play, CodeXml, MessageSquare } from 'lucide-react';
 import PropTypes from 'prop-types';
 
 const IconSidebar = ({ activeMenu, setActiveMenu }) => {
@@ -17,10 +17,16 @@ const IconSidebar = ({ activeMenu, setActiveMenu }) => {
 				title='Run Code'
 			/>
 			<SidebarButton
+				icon={<CodeXml size={30} className="text-[#eeeeee]" />}
+				isActive={activeMenu === 'code'}
+				onClick={() => setActiveMenu(activeMenu === 'code' ? null : 'code')}
+				title='CodeGENE'
+			/>
+			<SidebarButton
 				icon={<MessageSquare size={30} className="text-[#eeeeee]" />}
 				isActive={activeMenu === 'comments'}
 				onClick={() => setActiveMenu(activeMenu === 'comments' ? null : 'comments')}
-				title='Generate Comments'
+				title='CommentsGENE'
 			/>
 		</div>
 	);
