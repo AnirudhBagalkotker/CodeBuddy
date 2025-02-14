@@ -1,4 +1,4 @@
-import { Files, Play, CodeXml, MessageSquareCode } from 'lucide-react';
+import { Files, Play, CodeXml, BugPlay, BrainCircuit, MessageSquareCode, } from 'lucide-react';
 import PropTypes from 'prop-types';
 
 const IconSidebar = ({ activeMenu, setActiveMenu }) => {
@@ -21,6 +21,18 @@ const IconSidebar = ({ activeMenu, setActiveMenu }) => {
 				isActive={activeMenu === 'code'}
 				onClick={() => setActiveMenu(activeMenu === 'code' ? null : 'code')}
 				title='CodeGENE'
+			/>
+			<SidebarButton
+				icon={<BugPlay size={30} className="text-[#eeeeee]" />}
+				isActive={activeMenu === 'debug'}
+				onClick={() => setActiveMenu(activeMenu === 'debug' ? null : 'debug')}
+				title='DebugGENE'
+			/>
+			<SidebarButton
+				icon={<BrainCircuit size={30} className="text-[#eeeeee]" />}
+				isActive={activeMenu === 'explain'}
+				onClick={() => setActiveMenu(activeMenu === 'explain' ? null : 'explain')}
+				title='ExplainGENE'
 			/>
 			<SidebarButton
 				icon={<MessageSquareCode size={30} className="text-[#eeeeee]" />}

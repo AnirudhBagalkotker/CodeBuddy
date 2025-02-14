@@ -1,17 +1,18 @@
 const langMap = {
-	js: { name: 'javascript', icon: '📜', run: 1 },
-	jsx: { name: 'javascript', icon: '⚛️', run: 0 },
-	ts: { name: 'typescript', icon: '📘', run: 0 },
-	tsx: { name: 'typescript', icon: '⚛️', run: 0 },
-	css: { name: 'css', icon: '🎨', run: 0 },
-	html: { name: 'html', icon: '🌐', run: 0 },
-	json: { name: 'json', icon: '📋', run: 0 },
-	md: { name: 'markdown', icon: '📝', run: 0 },
-	py: { name: 'python', icon: '🐍', run: 1 },
-	java: { name: 'java', icon: '☕', run: 1 },
-	cpp: { name: 'c++', icon: '⚙️', run: 1 },
-	c: { name: 'c', icon: '⚙️', run: 1 },
-	default: { name: 'plaintext', icon: '📄', run: 0 },
+	js: { name: 'javascript', icon: '📜', run: 1, ai: 1 },
+	jsx: { name: 'javascript', icon: '⚛️', run: 0, ai: 1 },
+	ts: { name: 'typescript', icon: '📘', run: 0, ai: 1 },
+	tsx: { name: 'typescript', icon: '⚛️', run: 0, ai: 1 },
+	css: { name: 'css', icon: '🎨', run: 0, ai: 1 },
+	html: { name: 'html', icon: '🌐', run: 0, ai: 1 },
+	json: { name: 'json', icon: '📋', run: 0, ai: 0 },
+	md: { name: 'markdown', icon: '📝', run: 0, ai: 0 },
+	py: { name: 'python', icon: '🐍', run: 1, ai: 1 },
+	java: { name: 'java', icon: '☕', run: 1, ai: 1 },
+	cpp: { name: 'c++', icon: '⚙️', run: 1, ai: 1 },
+	c: { name: 'c', icon: '⚙️', run: 1, ai: 1 },
+	txt: { name: 'plaintext', icon: '📄', run: 0, ai: 0 },
+	default: { name: 'unknown', icon: '📄', run: 0, ai: 0 },
 };
 
 export const getLanguage = (fileName) => {
@@ -39,4 +40,8 @@ export const getFileIcon = (filePath) => {
 
 export const getRunStatus = (fileExtension) => {
 	return (langMap[fileExtension]?.run) || langMap.default.run;
+};
+
+export const getAIStatus = (fileExtension) => {
+	return langMap[fileExtension]?.ai || langMap.default.ai;
 };

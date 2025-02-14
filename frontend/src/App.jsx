@@ -7,8 +7,10 @@ import FileExplorer from './components/Sidebar/FileExplorer';
 import MonacoEditor from './components/Editor/MonacoEditor';
 import EditorTabs from './components/Editor/EditorTabs';
 import RunPanel from './components/Panels/RunPanel';
-import CommentsPanel from './components/Panels/CommentsPanel';
 import GenerateCodePanel from './components/Panels/GenerateCodePanel';
+import DebugCodePanel from './components/Panels/DebugCodePanel';
+import ExplainCodePanel from './components/Panels/ExplainCodePanel';
+import CommentsPanel from './components/Panels/CommentsPanel';
 import Header from './components/Header';
 
 const App = () => {
@@ -27,6 +29,8 @@ const App = () => {
 								{activeMenu === 'files' && <FileExplorer />}
 								{activeMenu === 'run' && <RunPanel />}
 								{activeMenu === 'code' && <GenerateCodePanel />}
+								{activeMenu === 'debug' && <DebugCodePanel />}
+								{activeMenu === 'explain' && <ExplainCodePanel />}
 								{activeMenu === 'comments' && <CommentsPanel />}
 							</div>
 						)}
